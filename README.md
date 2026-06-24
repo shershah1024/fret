@@ -1,10 +1,16 @@
 # Fret 🫠
 
-**Your Mac's tiny, anxious best friend.** A little menu-bar creature that watches
-your machine's vitals — disk, memory, CPU, heat, battery — and only speaks up when
-it actually matters, with escalating drama and the occasional 🎉.
+**Your Mac's tiny, anxious best friend.** A little menu-bar creature that keeps half
+an eye on your machine's vitals — disk, memory, CPU, heat, battery — and only pipes
+up when it actually matters, with escalating drama and the occasional 🎉.
 
 **→ [fret.tslfiles.org](https://fret.tslfiles.org)** for the download.
+
+> **Fret is not a system monitor.** If you want dashboards, graphs and sensors, use
+> [Stats](https://github.com/exelban/stats) (free) or iStat Menus — they're great.
+> Fret is the opposite: no dials to read, no numbers to babysit. It's a *pet* that
+> sits quietly and only frets out loud when something's genuinely off (then cheers
+> when it's fixed). Delight first; data never.
 
 ```
 💾 → 👀 → 😅 → 😩 → 🆘     chill · side-eye · worried · panic · defcon
