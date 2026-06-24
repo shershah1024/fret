@@ -1,0 +1,8 @@
+.build/
+dist/
+web/
+.wrangler/
+.DS_Store
+Package.resolved
+*.xcodeproj
+scripts/deploy_web.sh
