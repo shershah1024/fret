@@ -51,6 +51,11 @@ final class Watcher: ObservableObject {
         UNUserNotificationCenter.current().add(
             UNNotificationRequest(identifier: UUID().uuidString, content: c, trigger: nil))
     }
+
+    /// Fire a sample notification on demand (menu → Test notification).
+    func testPing() {
+        notify(icon: "😌", label: "Hello", body: "it's me, Fret. if you can see my face here, we're good. 🫶")
+    }
 }
 
 // MARK: - Login item (launch at login via SMAppService)
@@ -97,6 +102,7 @@ struct FretApp: App {
                 Text("30s").tag(30); Text("1 min").tag(60); Text("5 min").tag(300)
             }
             Divider()
+            Button("Test notification 🔔") { watcher.testPing() }
             Button(LoginItem.enabled ? "✓ Launch at Login" : "Launch at Login") { LoginItem.toggle() }
             Button("Quit Fret") { NSApplication.shared.terminate(nil) }
         } label: {
