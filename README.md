@@ -1,10 +1,27 @@
+<div align="center">
+
+<img src="assets/icon.png" alt="Fret" width="120" height="120">
+
 # Fret 🫠
 
-**Your Mac's tiny, anxious best friend.** A little menu-bar creature that keeps half
-an eye on your machine's vitals — disk, memory, CPU, heat, battery — and only pipes
-up when it actually matters, with escalating drama and the occasional 🎉.
+**Your Mac's tiny, anxious best friend.**
 
-**→ [fret.tslfiles.org](https://fret.tslfiles.org)** for the download.
+[![macOS 13+](https://img.shields.io/badge/macOS-13%2B-111?logo=apple&logoColor=white)](https://github.com/shershah1024/fret/releases/latest)
+[![Apple Silicon](https://img.shields.io/badge/Apple%20Silicon-arm64-111)](https://github.com/shershah1024/fret/releases/latest)
+[![Notarized](https://img.shields.io/badge/notarized-%E2%9C%93-1f8a5a)](https://github.com/shershah1024/fret/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-c98a10)](LICENSE)
+
+### [⬇&nbsp; Download Fret.dmg](https://github.com/shershah1024/fret/releases/latest/download/Fret.dmg)
+
+<sub>macOS 13+ · Apple Silicon · ~3.6 MB · or [build it yourself](#install) · [fret.tslfiles.org](https://fret.tslfiles.org)</sub>
+
+<img src="assets/hero.png" alt="Fret notifications — escalating from chill to defcon" width="100%">
+
+</div>
+
+A little menu-bar creature that keeps half an eye on your machine's vitals — disk,
+memory, CPU, heat, battery — and only pipes up when it actually matters, with
+escalating drama and the occasional 🎉.
 
 > **Fret is not a system monitor.** If you want dashboards, graphs and sensors, use
 > [Stats](https://github.com/exelban/stats) (free) or iStat Menus — they're great.
@@ -38,8 +55,8 @@ creature that frets about my machine's vitals so I don't have to.
 
 ## Install
 
-Download the notarized app from **[fret.tslfiles.org](https://fret.tslfiles.org)**,
-drag it to Applications, done. macOS 13+, Apple Silicon.
+Grab the notarized **[latest release](https://github.com/shershah1024/fret/releases/latest)**
+(`Fret.dmg`), open it, drag Fret to Applications, done. macOS 13+, Apple Silicon.
 
 Or build it yourself:
 
