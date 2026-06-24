@@ -28,7 +28,43 @@ rm -rf "$APP"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
 cp -f "$BIN" "$APP/Contents/MacOS/Fret"
 chmod +x "$APP/Contents/MacOS/Fret"
-cp -f "$REPO/assets/AppIcon.icns" "$APP/Contents/Resources/AppIcon.icns"
+
+# App icon: compile a real ASSET CATALOG (Assets.car + AppIcon.icns) from
+# assets/icon.png. The asset catalog is what Notification Center / IconServices
+# resolve via CFBundleIconName — a loose .icns alone leaves notifications blank.
+ICONSRC="$REPO/assets/icon.png"
+if xcrun --find actool >/dev/null 2>&1; then
+  XC="$(mktemp -d)/Fret.xcassets"; SET="$XC/AppIcon.appiconset"; mkdir -p "$SET"
+  for s in 16 32 64 128 256 512 1024; do sips -z $s $s "$ICONSRC" --out "$SET/i$s.png" >/dev/null 2>&1; done
+  printf '{"info":{"version":1,"author":"xcode"}}' > "$XC/Contents.json"
+  cat > "$SET/Contents.json" <<'JSON'
+{ "images":[
+  {"idiom":"mac","size":"16x16","scale":"1x","filename":"i16.png"},
+  {"idiom":"mac","size":"16x16","scale":"2x","filename":"i32.png"},
+  {"idiom":"mac","size":"32x32","scale":"1x","filename":"i32.png"},
+  {"idiom":"mac","size":"32x32","scale":"2x","filename":"i64.png"},
+  {"idiom":"mac","size":"128x128","scale":"1x","filename":"i128.png"},
+  {"idiom":"mac","size":"128x128","scale":"2x","filename":"i256.png"},
+  {"idiom":"mac","size":"256x256","scale":"1x","filename":"i256.png"},
+  {"idiom":"mac","size":"256x256","scale":"2x","filename":"i512.png"},
+  {"idiom":"mac","size":"512x512","scale":"1x","filename":"i512.png"},
+  {"idiom":"mac","size":"512x512","scale":"2x","filename":"i1024.png"}
+], "info":{"version":1,"author":"xcode"} }
+JSON
+  xcrun actool "$XC" --compile "$APP/Contents/Resources" --app-icon AppIcon \
+    --platform macosx --minimum-deployment-target 13.0 \
+    --output-partial-info-plist "$(mktemp)" >/dev/null 2>&1 \
+    && echo "fret: compiled asset catalog (Assets.car + AppIcon.icns)"
+fi
+# Fallback: ensure a loose .icns exists even if actool is unavailable.
+if [ ! -f "$APP/Contents/Resources/AppIcon.icns" ]; then
+  ISET="$(mktemp -d)/AppIcon.iconset"; mkdir -p "$ISET"
+  for s in 16 32 128 256 512; do d=$((s*2));
+    sips -z $s $s "$ICONSRC" --out "$ISET/icon_${s}x${s}.png" >/dev/null 2>&1
+    sips -z $d $d "$ICONSRC" --out "$ISET/icon_${s}x${s}@2x.png" >/dev/null 2>&1
+  done
+  iconutil -c icns "$ISET" -o "$APP/Contents/Resources/AppIcon.icns"
+fi
 
 cat > "$APP/Contents/Info.plist" <<PLIST
 <?xml version="1.0" encoding="UTF-8"?>
